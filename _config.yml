@@ -16,7 +16,7 @@ timezone: America/Chicago
 
 title: Shamik Patro # the main title
 
-tagline: Cybersecurity Professional # it will display as the sub-title
+tagline: Aspiring Full Stack Engineer # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   
@@ -88,7 +88,7 @@ theme_mode: # [light | dark]
 img_cdn: "https://chirpy-img.netlify.app"
 
 # the avatar on sidebar, support local or CORS resources
-avatar: "/commons/avatar.jpg"
+avatar: "https://pbs.twimg.com/profile_images/1773353297987895297/850gjLLy_400x400.jpg"
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.

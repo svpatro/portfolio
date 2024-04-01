@@ -16,10 +16,9 @@ timezone: America/Chicago
 
 title: Shamik Patro # the main title
 
-tagline: Aspiring Full Stack Engineer # it will display as the sub-title
+tagline: Aspiring Software Engineer # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://shamikpatro.com/', note that it does not end with a '/'.

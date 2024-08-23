@@ -32,11 +32,6 @@ For our layer-3 router, we decided to use a virtualized version of Netgate's [PF
 
 ### Challenges Faced
 
+While having the Tailscale package developed for PFSense was a lifesaver, the package itself does not support disabling SNAT (source network address translation). As a result, packets are rewritten with Tailscale's translated IP when arriving to the destination, causing havoc on the packet's return trip. Through some fanagling with PFSense's virtual IP / outbound NAT feature, this can be resolved to allow true site-to-site traffic flow.
 
-
-
-
-
-
-
-
+Hosting in multiple locations also means turning on and off multiple servers remotely to save on power consumption. This requires having a dedicated low-powered device on the network that is able to access the server's management page whenever needed. As a result, a dedicated tailscale account (tailnet) is needed per remote site since only one tailnet is allowed per account.

@@ -31,6 +31,8 @@ For our layer-3 router, we decided to use a virtualized version of Netgate's [PF
 
 In order to have each remote site be able to communicate to each other, all virtualized PFSense routers would need to be in the same Tailscale instance.
 
+![Tailscale Network](/_posts/img/Range.png)
+
 
 ### Challenges Faced
 

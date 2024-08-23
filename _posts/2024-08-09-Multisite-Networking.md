@@ -1,5 +1,5 @@
 ---
-title: Building a distributed Cyber Range
+title: The Distributed Cyber Range
 date: 2024-08-09
 author: Shamik
 ---

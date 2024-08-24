@@ -14,12 +14,14 @@ Initially, the thought was to self-host a cluster of servers at a teammate's apa
 
 What was truly needed for our idea to work was geographically distributing a set of servers while having the network services accessible from anywhere. Typically, this requires a site-to-site virtual private network (S2S VPN) with layer-3 routing devices.
 
-One might ask, "Why not install a VPN client into every single computer into the VPN network?"
+One might ask, "Why not install a VPN client onto every single computer in the VPN network?"
 
-The reason is three-fold: 
+The reasons are plentiful: 
 1. Configuration time would be proportional to how many computers are needed for each training session.
 2. Having a dedicated Layer-3 virtual routing device allows us to create our own virtual LANs, allowing for a more secure and segmented network overall.
 3. Many layer-3 routing devices are internet gateways and have built-in VPN's, making our lives much easier.
+4. LAN devices are stationary on the servers, so gateways will always be able to communicate with devices and vice versa.
+5. More VPN accounts adds complexity and increases pricing dramatically (remember, we're still in college!)
 
 ### Multisite Networking
 
@@ -29,13 +31,14 @@ For our servers, we utilized several pre-owned Dell servers from [SaveMyServer](
 
 For our layer-3 router, we decided to use a virtualized version of Netgate's [PFSense](https://www.pfsense.org/), which conveniently has the Tailscale package readily available. Setting up each virtualized router required us to point to our local router's as the upstream router (WAN) and create a virtualized switch (Virtual Machine Bridge) to connect any new machine into our virtualized LAN. 
 
-In order to have each remote site be able to communicate to each other, all virtualized PFSense routers would need to be in the same Tailscale instance.
+In order to have each remote site be able to communicate with one other, all virtualized PFSense routers would need to be in the same Tailscale instance. This effectively builds the multisite VPN setup since traffic is able to flow from site-to-site-to-site and internal sites are served by an internal-facing DNS server.
 
 ![Tailscale Network](/assets/img/Range.png)
+_Note: VM Server A, B, & Proxy Server are colocated. No need for redundant virtualized routers!_
 
 
 ### Challenges Faced
 
-While having the Tailscale package developed for PFSense was a lifesaver, the package itself does not support disabling SNAT (source network address translation). As a result, packets are rewritten with Tailscale's translated IP when arriving to the destination, causing havoc on the packet's return trip. Through some fanagling with PFSense's virtual IP / outbound NAT feature, this can be resolved to allow true site-to-site traffic flow.
+While having the Tailscale package developed for PFSense was a lifesaver, the package itself does not support disabling SNAT (source network address translation). As a result, packets are rewritten with Tailscale's translated IP when arriving to the destination, wreaking havoc on the packet's return trip. Through some fanagling with PFSense's virtual IP / outbound NAT feature, this can be resolved to allow true site-to-site traffic flow.
 
 Hosting in multiple locations also means turning on and off multiple servers remotely to save on power consumption. This requires having a dedicated low-powered device on the network that is able to access the server's management page whenever needed. As a result, a dedicated tailscale account (tailnet) is needed per remote site since only one tailnet is allowed per account.
